@@ -1,0 +1,8 @@
+{
+  "confirm_config_sha256": "66005fa688b4a86490fb53117a5b7393a8c97d1bbf200de893203884a83c6e24",
+  "confirm_py_sha256": "563d6b560a66fd8206b41f53f6b736b1e6382f6174ee3482adf528ee2d687f18",
+  "run_py_sha256": "650fd7ffd9cb3b5c58906d761711abe4d914055635e6b7aea46b5457adb1103f",
+  "calibration_py_sha256": "584722114c7436596f41cf14819af68958efc37b3c381064a4c1ed39fec074bc",
+  "locked_utc": "2026-10-19T08:08:33Z",
+  "note": "Locked before generating any confirmatory test data. Dry run used unregistered seed 9999 and test offset 12345 only."
+}

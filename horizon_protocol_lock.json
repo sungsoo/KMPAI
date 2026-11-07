@@ -1,0 +1,30 @@
+{
+  "created_utc": "2026-10-25T04:06:57Z",
+  "horizon_seconds": 10.0,
+  "steps": 200,
+  "confirm_seeds": [
+    503,
+    541,
+    587,
+    619,
+    661
+  ],
+  "r3_seeds": [
+    701,
+    733,
+    769,
+    811,
+    857
+  ],
+  "sha256": {
+    "horizon_config.json": "f7a016285bf6197b1ebe252bdd394a087bc908181a66ab8c03de7b481413998b",
+    "horizon_study.py": "9627e0354509c326661ff1aa40b4a76aedb48204f1ebf9046783ebba4ec7a80b",
+    "confirm.py": "563d6b560a66fd8206b41f53f6b736b1e6382f6174ee3482adf528ee2d687f18",
+    "confirm_config.json": "66005fa688b4a86490fb53117a5b7393a8c97d1bbf200de893203884a83c6e24",
+    "confirm_r2.py": "f47636285113bf346e3a205699985b74d324c327e7c45e0dfb001db93edff152",
+    "confirm_r3.py": "4c49d635844955d70d83f4535ad2154fd5799186365926334624ea5cee3b371f",
+    "confirm_r3_config.json": "8fc70b13c754703f0a20de0fdb79fff0e985b8c62410a71a0998d7a16eb7ff55",
+    "run.py": "650fd7ffd9cb3b5c58906d761711abe4d914055635e6b7aea46b5457adb1103f",
+    "calibration.py": "584722114c7436596f41cf14819af68958efc37b3c381064a4c1ed39fec074bc"
+  }
+}

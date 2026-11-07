@@ -1,0 +1,19 @@
+{
+  "purpose": "Round-3 experiments (v22), fixed before any r3 data are generated: (B-1) conformal uncertainty gating as a published-method baseline, (B-2) distribution-shift detector that switches the LTT decision off.",
+  "base_config": "confirm_config.json",
+  "modes": {
+    "confirm": {"seeds": [307, 331, 359, 383, 409], "test_seed_offset": 800000,
+                "note": "NEW seeds and NEW test data (never used before) -> confirmatory r3 results"},
+    "posthoc": {"seeds": [101, 131, 163, 197, 229], "test_seed_offset": 700000,
+                "note": "the v14 confirmatory seeds/test data (already analysed) -> supplementary r3 results"}
+  },
+  "dry_run": {"seeds": [9999], "test_seed_offset": 12345, "note": "code check only; never reported"},
+  "ensemble_members": 5,
+  "ensemble_seed_stride": 50000,
+  "conformal_alpha": 0.1,
+  "detector_window_steps": 5,
+  "detector_alpha": 0.05,
+  "detector_monitor_episodes": 8,
+  "detector_min_exceed": 3,
+  "evaluation_episodes": "test episodes 9..48 (the first 8 are the detector's monitoring window and are excluded for every method)"
+}

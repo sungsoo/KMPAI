@@ -1,0 +1,27 @@
+{
+  "created_utc": "2026-10-28T13:43:00Z",
+  "steps": 200,
+  "seeds": [
+    1301,
+    1327,
+    1361,
+    1399,
+    1423
+  ],
+  "test_seed_offset": 930000,
+  "etas": [
+    0.0,
+    0.01,
+    0.05,
+    0.1
+  ],
+  "sha256": {
+    "eta_config.json": "3f20f9a5aaebf632f9805a39fa555687f1ee374fde7beb14d6d07db1aa85771b",
+    "eta_study.py": "4d019792d3d459affc3ba1d5fd4accb019910405fe745b6b2573267e8d570933",
+    "horizon_config.json": "f7a016285bf6197b1ebe252bdd394a087bc908181a66ab8c03de7b481413998b",
+    "confirm.py": "563d6b560a66fd8206b41f53f6b736b1e6382f6174ee3482adf528ee2d687f18",
+    "confirm_config.json": "66005fa688b4a86490fb53117a5b7393a8c97d1bbf200de893203884a83c6e24",
+    "run.py": "650fd7ffd9cb3b5c58906d761711abe4d914055635e6b7aea46b5457adb1103f",
+    "calibration.py": "584722114c7436596f41cf14819af68958efc37b3c381064a4c1ed39fec074bc"
+  }
+}

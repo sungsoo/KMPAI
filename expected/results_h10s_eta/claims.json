@@ -1,0 +1,20 @@
+{
+  "E1_validity": {
+    "verdict": "not_supported",
+    "per_target": {
+      "posthoc": "supported",
+      "retrain": "not_supported"
+    },
+    "ep_exceed_hi": {
+      "posthoc": 0.0014503678735976072,
+      "retrain": 0.1536889988733396
+    }
+  },
+  "E2_usefulness": {
+    "verdict": "not_supported",
+    "increase_runs": 1,
+    "min_effect_runs": 8
+  },
+  "E3_cost": "descriptive (summary.csv)",
+  "E4_shift": "descriptive (summary.csv, applied_runs_worse at ood_damp)"
+}

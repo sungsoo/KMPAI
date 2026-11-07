@@ -1,0 +1,27 @@
+{
+  "purpose": "Pre-registered tolerance-margin (eta) LTT study (ICTExpress-v1). Fixed before any data of this study are generated. Everything except the decision rule, the seeds and the test-seed offset is taken unchanged from the 10-s protocol (horizon_config.json + confirm_config.json).",
+  "base_config": "confirm_config.json",
+  "horizon_config": "horizon_config.json",
+  "seeds": [1301, 1327, 1361, 1399, 1423],
+  "seed_reason": "new seeds; seed mod 1000 differs from every earlier seed (101..229, 503..661, 701..857), so no data stream of an earlier study is reused",
+  "test_seed_offset": 930000,
+  "rule": "apply candidate c (post-hoc correction c* chosen on C_s1, or the retrained model fitted with C_s2 held out) iff u(k_eta, n, eps) <= delta, where k_eta = #{i in C_s2 : L_i(c) > (1 + eta) L_i(Z)} and u is the one-sided Clopper-Pearson upper bound",
+  "eta_primary": 0.05,
+  "eta_sensitivity": [0.01, 0.10],
+  "eta_reference": 0.0,
+  "delta": 0.1,
+  "epsilon": 0.05,
+  "guarantee": "with C_s2 i.i.d. from the test distribution and c independent of C_s2: with probability >= 1 - eps, P(L(c) > (1 + eta) L(Z)) <= delta for an applied c (eta-level deterioration). Strict deterioration (eta = 0) is NOT controlled for eta > 0 and is reported separately.",
+  "targets": ["posthoc", "retrain"],
+  "retrain_definition": "same as confirm_r2.py: residual MLP refitted on train + calibration episodes (judge set held out), same epochs/patience/hidden/lr as Z",
+  "claims": {
+    "E1_validity": "eta = 0.05, ID test, applied runs pooled per target: the episode-level eta-exceedance rate has a one-sided 95% Clopper-Pearson upper bound <= delta (0.1). Supported if it holds for both targets with at least one applied run; otherwise not_supported (a target with no applied run is reported as inconclusive).",
+    "E2_usefulness": "retraining target: applied runs at eta = 0.05 minus applied runs at eta = 0 >= min_effect_runs (8 of 80 = 10%). Supported / not_supported.",
+    "E3_cost": "descriptive: ID net gain and strict episode-level deterioration of the eta = 0.05 rule vs the eta = 0 rule for both targets (seed-cluster bootstrap 95% CI, B = 2000).",
+    "E4_shift": "descriptive: under the damping shift, number of applied runs that are worse than Z (run-level MSE) for every eta and target."
+  },
+  "min_effect_runs": 8,
+  "multiplicity": "one primary eta and two primary claims (E1, E2); sensitivity etas are reported as sensitivity, not as separate confirmatory tests",
+  "stopping": "all 80 runs are executed; no early stopping; a failed run is reported as missing, never as 0",
+  "bootstrap": {"B": 2000, "unit": "seed", "rng_seed": 20261028}
+}

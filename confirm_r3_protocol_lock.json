@@ -1,0 +1,12 @@
+{
+  "sha256": {
+    "confirm_r3_config.json": "8fc70b13c754703f0a20de0fdb79fff0e985b8c62410a71a0998d7a16eb7ff55",
+    "confirm_r3.py": "4c49d635844955d70d83f4535ad2154fd5799186365926334624ea5cee3b371f",
+    "confirm.py": "563d6b560a66fd8206b41f53f6b736b1e6382f6174ee3482adf528ee2d687f18",
+    "confirm_config.json": "66005fa688b4a86490fb53117a5b7393a8c97d1bbf200de893203884a83c6e24",
+    "run.py": "650fd7ffd9cb3b5c58906d761711abe4d914055635e6b7aea46b5457adb1103f",
+    "calibration.py": "584722114c7436596f41cf14819af68958efc37b3c381064a4c1ed39fec074bc"
+  },
+  "locked_utc": "2026-10-22T20:35:52Z",
+  "note": "Locked before generating any r3 data for the registered seeds. The dry run used only the unregistered seed 9999 and test offset 12345. confirm (seeds 307..409, offset 800000) = confirmatory; posthoc (seeds 101..229, offset 700000) = supplementary."
+}

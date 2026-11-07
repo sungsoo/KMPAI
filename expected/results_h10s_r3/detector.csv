@@ -1,0 +1,4 @@
+split,runs,detected,detected_rate,ltt_applied_runs,detected_among_ltt_applied
+id,80,2,0.025,23,1
+ood_scale,80,80,1.0,23,23
+ood_damp,80,71,0.8875,23,21
