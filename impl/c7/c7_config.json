@@ -1,0 +1,64 @@
+{
+  "purpose": "C7 implementation settings (design/C7/plan.toml locked 39289bba1c10). Data generation, systems, models and candidate fitting are those of C1 (impl/c1/c1_config.json, imported unchanged); only the seeds, the judge sizes and the acceptance rules are new.",
+  "c1_config": "../c1/c1_config.json",
+  "seeds": [
+    6901,
+    6904,
+    6907,
+    6910,
+    6913,
+    6916,
+    6919,
+    6922,
+    6925,
+    6928,
+    6931,
+    6934,
+    6937,
+    6940,
+    6943,
+    6946,
+    6949,
+    6952,
+    6955,
+    6958,
+    6961,
+    6964,
+    6967,
+    6970,
+    6973,
+    6976,
+    6979,
+    6982,
+    6985,
+    6988,
+    6991,
+    6994,
+    6997,
+    6999
+  ],
+  "judge_primary": 100,
+  "judge_small": 36,
+  "eps": 0.05,
+  "tau": 0.0,
+  "clip": 2.0,
+  "tail_variant": {
+    "kappa": 0.1,
+    "beta": 0.2
+  },
+  "strict_c1": {
+    "delta": 0.1,
+    "judge": 36
+  },
+  "strict_dir_ablation": {
+    "delta": 0.1,
+    "judge": 100
+  },
+  "tie_tol": 1e-09,
+  "direction_order": "ascending C_s1 loss of I + mu_j v_j v_j^T for each eigen-direction j of A - I (|mu_j| > tie_tol); computed on C_s1 only, before any judge data are used",
+  "bootstrap": {
+    "B": 2000,
+    "rng_seed": 20261107
+  },
+  "n3_min_runs_share": 0.1
+}

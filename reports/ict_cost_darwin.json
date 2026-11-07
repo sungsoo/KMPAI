@@ -1,0 +1,44 @@
+{
+  "machine": {
+    "platform": "macOS-27.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "python": "3.12.16",
+    "numpy": "2.4.4"
+  },
+  "arms": {
+    "planar_2link": {
+      "d": 2,
+      "cases_timed": 20,
+      "gate_ms_median": 2.1453749504871666,
+      "gate_ms_p95": 2.288762165699154,
+      "ratios_ms_median_per_candidate": 0.28239551465958357,
+      "apply_us_median_per_forecast": 5.624955520033836,
+      "bytes_observed_judge_Y": 161600,
+      "bytes_judge_forecasts_PZ": 320000,
+      "bytes_matrix_A": 16
+    },
+    "planar_3link": {
+      "d": 3,
+      "cases_timed": 20,
+      "gate_ms_median": 2.1854370133951306,
+      "gate_ms_p95": 2.3966732027474507,
+      "ratios_ms_median_per_candidate": 0.3631245344877243,
+      "apply_us_median_per_forecast": 6.124959327280521,
+      "bytes_observed_judge_Y": 242400,
+      "bytes_judge_forecasts_PZ": 480000,
+      "bytes_matrix_A": 36
+    },
+    "franka_7dof": {
+      "d": 7,
+      "cases_timed": 20,
+      "gate_ms_median": 2.077646437101066,
+      "gate_ms_p95": 4.143176751676922,
+      "ratios_ms_median_per_candidate": 0.6181664648465812,
+      "apply_us_median_per_forecast": 8.707982487976551,
+      "bytes_observed_judge_Y": 565600,
+      "bytes_judge_forecasts_PZ": 1120000,
+      "bytes_matrix_A": 196
+    }
+  }
+}

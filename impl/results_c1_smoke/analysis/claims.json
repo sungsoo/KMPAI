@@ -1,0 +1,99 @@
+{
+  "cases": 6,
+  "expected_cases": 408,
+  "M1": {
+    "planar_2link": {
+      "worse": 1,
+      "runs": 2,
+      "share": 0.5,
+      "lower95": 0.02532056551910361,
+      "upper95": 0.9746794344808963,
+      "verdict": "inconclusive"
+    },
+    "planar_3link": {
+      "worse": 2,
+      "runs": 2,
+      "share": 1.0,
+      "lower95": 0.22360679774997896,
+      "upper95": 1.0,
+      "verdict": "supported"
+    },
+    "franka_7dof": {
+      "worse": 0,
+      "runs": 2,
+      "share": 0.0,
+      "lower95": 0.0,
+      "upper95": 0.776393202250021,
+      "verdict": "inconclusive"
+    }
+  },
+  "M2": {
+    "planar_2link": {
+      "accepted": 0,
+      "worse": 0,
+      "lower95": NaN,
+      "upper95": NaN,
+      "verdict": "inconclusive"
+    },
+    "planar_3link": {
+      "accepted": 0,
+      "worse": 0,
+      "lower95": NaN,
+      "upper95": NaN,
+      "verdict": "inconclusive"
+    },
+    "franka_7dof": {
+      "accepted": 0,
+      "worse": 0,
+      "lower95": NaN,
+      "upper95": NaN,
+      "verdict": "inconclusive"
+    }
+  },
+  "M3": {
+    "median": 0.0,
+    "boot95": [
+      0.0,
+      0.0
+    ],
+    "wilcoxon_p_vs_0.05": 1.0,
+    "holm_p": 1.0,
+    "verdict": "not_supported"
+  },
+  "M4": {
+    "median_diff": 0.0,
+    "wilcoxon_p": 1.0,
+    "holm_p": 1.0,
+    "verdict": "not_supported"
+  },
+  "M5_descriptive": {
+    "planar_2link": {
+      "accepted": 0,
+      "full_matrix_share_of_accepted": NaN,
+      "acceptance_by_judge_n": {
+        "36": 0.0,
+        "60": 0.0,
+        "100": 0.0
+      }
+    },
+    "planar_3link": {
+      "accepted": 0,
+      "full_matrix_share_of_accepted": NaN,
+      "acceptance_by_judge_n": {
+        "36": 0.0,
+        "60": 0.0,
+        "100": 0.0
+      }
+    },
+    "franka_7dof": {
+      "accepted": 0,
+      "full_matrix_share_of_accepted": NaN,
+      "acceptance_by_judge_n": {
+        "36": 0.0,
+        "60": 0.0,
+        "100": 0.0
+      }
+    }
+  },
+  "kinematic_max_correction": 6.34041430469523e-16
+}

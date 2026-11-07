@@ -1,0 +1,201 @@
+{
+  "purpose": "C1 implementation settings (design/C1/plan.toml locked 1527aee13baf). Values not fixed by the plan (horizon, dt, mismatch sizes, control, MLP) are fixed here before any main-study data and recorded with a plan relock.",
+  "plan_lock": "../../design/C1/plan.lock.json",
+  "seeds": [
+    3011,
+    3023,
+    3037,
+    3041,
+    3049,
+    3061,
+    3067,
+    3079,
+    3083,
+    3089,
+    3109,
+    3119,
+    3121,
+    3137,
+    3163,
+    3167,
+    3169,
+    3181,
+    3187,
+    3191,
+    3203,
+    3209,
+    3217,
+    3221,
+    3229,
+    3251,
+    3253,
+    3257,
+    3259,
+    3271,
+    3299,
+    3301,
+    3307,
+    3313
+  ],
+  "systems": {
+    "planar_2link": {
+      "kind": "planar",
+      "n_links": 2,
+      "q_home": [
+        -1.2,
+        0.6
+      ],
+      "torque_scale": [
+        1.0,
+        1.0
+      ],
+      "u_amp": 1.2,
+      "q_dev": 0.3,
+      "v_dev": 0.3,
+      "mass_scale": [
+        1.05,
+        0.97
+      ],
+      "extra_damping": 0.12,
+      "coulomb": 0.05,
+      "coupling": 0.3,
+      "mismatch_mask": [
+        1,
+        0
+      ],
+      "kp": 8.0,
+      "kd": 1.5
+    },
+    "planar_3link": {
+      "kind": "planar",
+      "n_links": 3,
+      "q_home": [
+        -1.2,
+        0.6,
+        0.4
+      ],
+      "torque_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "u_amp": 1.2,
+      "q_dev": 0.3,
+      "v_dev": 0.3,
+      "mass_scale": [
+        1.05,
+        0.97,
+        1.04
+      ],
+      "extra_damping": 0.12,
+      "coulomb": 0.05,
+      "coupling": 0.3,
+      "mismatch_mask": [
+        1,
+        0,
+        1
+      ],
+      "kp": 8.0,
+      "kd": 1.5
+    },
+    "franka_7dof": {
+      "kind": "franka",
+      "q_home": [
+        0.0,
+        0.3,
+        0.0,
+        -1.8,
+        0.0,
+        2.1,
+        0.8
+      ],
+      "torque_scale": [
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        1.5,
+        1.5,
+        1.5
+      ],
+      "u_amp": 1.2,
+      "q_dev": 0.3,
+      "v_dev": 0.3,
+      "mass_scale": [
+        1.05,
+        0.97,
+        1.04,
+        0.96,
+        1.05,
+        0.97,
+        1.04
+      ],
+      "extra_damping": 0.12,
+      "coulomb": 0.05,
+      "coupling": 0.3,
+      "mismatch_mask": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "kp": 8.0,
+      "kd": 1.5
+    }
+  },
+  "train_episodes": [
+    12,
+    36
+  ],
+  "label_noise": [
+    0.0,
+    0.3
+  ],
+  "label_noise_definition": "Gaussian noise added to the residual-acceleration labels with std = label_noise x per-joint RMS of the noise-free labels of that run",
+  "dt": 0.01,
+  "steps": 100,
+  "truth_substeps": 5,
+  "range_scale": 2.5,
+  "episodes": {
+    "calibration": 12,
+    "selection": 12,
+    "judge": 100,
+    "judge_primary": 36,
+    "judge_post_hoc": [
+      60,
+      100
+    ],
+    "test": 48
+  },
+  "mlp": {
+    "hidden_per_joint": 16,
+    "hidden_base": 32,
+    "layers": 2,
+    "lr": 0.003,
+    "max_epochs": 300,
+    "patience": 30,
+    "batch": 512
+  },
+  "retrain_data": "train + calibration + judge(100) episodes; selection episodes are the early-stopping split for Z and for the retrained model",
+  "lambdas": [
+    0.0,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "ltt_delta": 0.1,
+  "ltt_epsilon": 0.05,
+  "mean_rule_tau": 0.01,
+  "seed_streams": "data seed = seed + 100000 * system_index + 1000 * split_index (+ 7 for the noise stream); train episodes are generated once (36) and the first 12 are used for n = 12",
+  "bootstrap": {
+    "B": 2000,
+    "rng_seed": 20261106
+  },
+  "mismatch_definition": "extra viscous damping and Coulomb friction act on joints with mismatch_mask = 1 (even joints); neighbour coupling and link-mass error act on all joints",
+  "control_definition": "tau = nominal gravity compensation(q) + torque_scale * (kp * (q_home - q) - kd * v) + u(t), evaluated at the forecaster's own state; u(t) is the action"
+}

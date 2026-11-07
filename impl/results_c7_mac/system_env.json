@@ -1,0 +1,15 @@
+{
+  "cpu": "Apple M5 Max",
+  "cpu_cores_logical": 18,
+  "ram_bytes": 137438953472,
+  "os": "Darwin 27.2.0",
+  "machine": "arm64",
+  "macos_version": "27.2",
+  "python": "3.12.14",
+  "torch": "2.14.1",
+  "cuda": false,
+  "mps": true,
+  "device": "cpu",
+  "numpy": "2.4.4",
+  "scipy": "1.17.1"
+}

@@ -1,0 +1,332 @@
+{
+  "cases": 408,
+  "expected_cases": 408,
+  "N1": {
+    "median": 0.25865874084179885,
+    "boot95": [
+      0.21773001822262775,
+      0.2850179657639644
+    ],
+    "wilcoxon_p_vs_0.05": 8.778609047327565e-23,
+    "holm_p": 1.755721809465513e-22,
+    "applied": 120,
+    "runs": 136,
+    "verdict": "supported"
+  },
+  "N3": {
+    "applied_dir": 120,
+    "applied_whole": 128,
+    "difference": -8,
+    "discordant_b_c": [
+      1,
+      9
+    ],
+    "mcnemar_p": 0.9990234375,
+    "holm_p": 0.9990234375,
+    "verdict": "not_supported"
+  },
+  "N2": {
+    "planar_2link": {
+      "applied": 63,
+      "mean_ratio_worse": 0,
+      "lower95": 0.0,
+      "upper95": 0.04643845148393822,
+      "verdict": "supported"
+    },
+    "planar_3link": {
+      "applied": 73,
+      "mean_ratio_worse": 0,
+      "lower95": 0.0,
+      "upper95": 0.04020679425316584,
+      "verdict": "supported"
+    },
+    "franka_7dof": {
+      "applied": 120,
+      "mean_ratio_worse": 0,
+      "lower95": 0.0,
+      "upper95": 0.024655401055656376,
+      "verdict": "supported"
+    }
+  },
+  "N4_descriptive": {
+    "planar_2link": {
+      "strict_ltt_c1": {
+        "applied": 0,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.0
+      },
+      "mag_whole_gate": {
+        "applied": 63,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.06767881971806466
+      },
+      "mag_dir_gate": {
+        "applied": 63,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.06639590715792942
+      },
+      "strict_dir_gate": {
+        "applied": 0,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.0
+      },
+      "mag_dir_n36": {
+        "applied": 9,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.015509168523849759
+      },
+      "mag_dir_tail": {
+        "applied": 41,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.03303098987424513
+      },
+      "mean_loss_rule": {
+        "applied": 119,
+        "runs": 136,
+        "median_rel_gain_id": 0.06433739081443154,
+        "net_gain_id": 0.0865848142780784
+      },
+      "always_on": {
+        "applied": 134,
+        "runs": 136,
+        "median_rel_gain_id": 0.06956845637885473,
+        "net_gain_id": 0.09070292018257031
+      }
+    },
+    "planar_3link": {
+      "strict_ltt_c1": {
+        "applied": 0,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.0
+      },
+      "mag_whole_gate": {
+        "applied": 96,
+        "runs": 136,
+        "median_rel_gain_id": 0.11868568632952445,
+        "net_gain_id": 0.1973061287434007
+      },
+      "mag_dir_gate": {
+        "applied": 73,
+        "runs": 136,
+        "median_rel_gain_id": 0.0714089601602334,
+        "net_gain_id": 0.22414014222425938
+      },
+      "strict_dir_gate": {
+        "applied": 1,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.00884527052429851
+      },
+      "mag_dir_n36": {
+        "applied": 25,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.14662655584641138
+      },
+      "mag_dir_tail": {
+        "applied": 47,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.15086131292384197
+      },
+      "mean_loss_rule": {
+        "applied": 132,
+        "runs": 136,
+        "median_rel_gain_id": 0.13622412138690254,
+        "net_gain_id": 0.21920576997285923
+      },
+      "always_on": {
+        "applied": 136,
+        "runs": 136,
+        "median_rel_gain_id": 0.13622412138690254,
+        "net_gain_id": 0.21923604180062506
+      }
+    },
+    "franka_7dof": {
+      "strict_ltt_c1": {
+        "applied": 2,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.015723920714747375
+      },
+      "mag_whole_gate": {
+        "applied": 128,
+        "runs": 136,
+        "median_rel_gain_id": 0.25865874084179874,
+        "net_gain_id": 0.306900348936738
+      },
+      "mag_dir_gate": {
+        "applied": 120,
+        "runs": 136,
+        "median_rel_gain_id": 0.25865874084179885,
+        "net_gain_id": 0.3017784042758457
+      },
+      "strict_dir_gate": {
+        "applied": 0,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.0
+      },
+      "mag_dir_n36": {
+        "applied": 56,
+        "runs": 136,
+        "median_rel_gain_id": 0.0,
+        "net_gain_id": 0.21715843700344772
+      },
+      "mag_dir_tail": {
+        "applied": 85,
+        "runs": 136,
+        "median_rel_gain_id": 0.19023505386847012,
+        "net_gain_id": 0.22774533646155126
+      },
+      "mean_loss_rule": {
+        "applied": 135,
+        "runs": 136,
+        "median_rel_gain_id": 0.25865874084179874,
+        "net_gain_id": 0.3132568715522388
+      },
+      "always_on": {
+        "applied": 136,
+        "runs": 136,
+        "median_rel_gain_id": 0.25865874084179874,
+        "net_gain_id": 0.31431006172828635
+      }
+    }
+  },
+  "N5_descriptive": {
+    "planar_2link": {
+      "strict_ltt_c1": {
+        "applied": 0,
+        "worse": 0,
+        "max_harm": 0.0
+      },
+      "mag_whole_gate": {
+        "applied": 63,
+        "worse": 54,
+        "max_harm": 0.0965043248444352
+      },
+      "mag_dir_gate": {
+        "applied": 63,
+        "worse": 54,
+        "max_harm": 0.1464929384937378
+      },
+      "strict_dir_gate": {
+        "applied": 0,
+        "worse": 0,
+        "max_harm": 0.0
+      },
+      "mag_dir_n36": {
+        "applied": 9,
+        "worse": 5,
+        "max_harm": 0.038534985053075205
+      },
+      "mag_dir_tail": {
+        "applied": 41,
+        "worse": 33,
+        "max_harm": 0.04557566798734359
+      },
+      "mean_loss_rule": {
+        "applied": 119,
+        "worse": 107,
+        "max_harm": 0.17836511195407265
+      },
+      "always_on": {
+        "applied": 134,
+        "worse": 121,
+        "max_harm": 0.17836511195407265
+      }
+    },
+    "planar_3link": {
+      "strict_ltt_c1": {
+        "applied": 0,
+        "worse": 0,
+        "max_harm": 0.0
+      },
+      "mag_whole_gate": {
+        "applied": 96,
+        "worse": 78,
+        "max_harm": 10.686984489899654
+      },
+      "mag_dir_gate": {
+        "applied": 73,
+        "worse": 58,
+        "max_harm": 10.686984489899654
+      },
+      "strict_dir_gate": {
+        "applied": 1,
+        "worse": 1,
+        "max_harm": 0.8633935230056813
+      },
+      "mag_dir_n36": {
+        "applied": 25,
+        "worse": 19,
+        "max_harm": 1.8849782950064677
+      },
+      "mag_dir_tail": {
+        "applied": 47,
+        "worse": 36,
+        "max_harm": 10.686984489899654
+      },
+      "mean_loss_rule": {
+        "applied": 132,
+        "worse": 109,
+        "max_harm": 10.686984489899654
+      },
+      "always_on": {
+        "applied": 136,
+        "worse": 113,
+        "max_harm": 10.686984489899654
+      }
+    },
+    "franka_7dof": {
+      "strict_ltt_c1": {
+        "applied": 2,
+        "worse": 0,
+        "max_harm": 0.0
+      },
+      "mag_whole_gate": {
+        "applied": 128,
+        "worse": 9,
+        "max_harm": 0.015283034647530759
+      },
+      "mag_dir_gate": {
+        "applied": 120,
+        "worse": 6,
+        "max_harm": 0.015283034647530759
+      },
+      "strict_dir_gate": {
+        "applied": 0,
+        "worse": 0,
+        "max_harm": 0.0
+      },
+      "mag_dir_n36": {
+        "applied": 56,
+        "worse": 1,
+        "max_harm": 0.008526219198402709
+      },
+      "mag_dir_tail": {
+        "applied": 85,
+        "worse": 4,
+        "max_harm": 0.015283034647530759
+      },
+      "mean_loss_rule": {
+        "applied": 135,
+        "worse": 9,
+        "max_harm": 0.021000847546182737
+      },
+      "always_on": {
+        "applied": 136,
+        "worse": 10,
+        "max_harm": 0.021000847546182737
+      }
+    }
+  },
+  "kinematic_max_gates": 6.574601973952099e-16
+}

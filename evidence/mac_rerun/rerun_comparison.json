@@ -1,0 +1,18 @@
+{
+  "c1": {
+    "cases_compared": 408,
+    "missing_in_packaged": [],
+    "decision_differences": [],
+    "max_rel_mse_diff": 0.0,
+    "verdicts_identical": true,
+    "claims_numbers_identical": false
+  },
+  "c7": {
+    "cases_compared": 408,
+    "missing_in_packaged": [],
+    "decision_differences": [],
+    "max_rel_mse_diff": 0.0,
+    "verdicts_identical": true,
+    "claims_numbers_identical": false
+  }
+}

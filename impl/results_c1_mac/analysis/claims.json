@@ -1,0 +1,99 @@
+{
+  "cases": 408,
+  "expected_cases": 408,
+  "M1": {
+    "planar_2link": {
+      "worse": 111,
+      "runs": 136,
+      "share": 0.8161764705882353,
+      "lower95": 0.7528226599844792,
+      "upper95": 0.8688575911283211,
+      "verdict": "supported"
+    },
+    "planar_3link": {
+      "worse": 97,
+      "runs": 136,
+      "share": 0.7132352941176471,
+      "lower95": 0.6426478422490762,
+      "upper95": 0.7767021203273858,
+      "verdict": "supported"
+    },
+    "franka_7dof": {
+      "worse": 7,
+      "runs": 136,
+      "share": 0.051470588235294115,
+      "lower95": 0.02440287814670678,
+      "upper95": 0.09449961971517808,
+      "verdict": "not_supported"
+    }
+  },
+  "M2": {
+    "planar_2link": {
+      "accepted": 5,
+      "worse": 0,
+      "lower95": 0.0,
+      "upper95": 0.450719728346941,
+      "verdict": "inconclusive"
+    },
+    "planar_3link": {
+      "accepted": 1,
+      "worse": 0,
+      "lower95": 0.0,
+      "upper95": 0.95,
+      "verdict": "inconclusive"
+    },
+    "franka_7dof": {
+      "accepted": 0,
+      "worse": 0,
+      "lower95": NaN,
+      "upper95": NaN,
+      "verdict": "inconclusive"
+    }
+  },
+  "M3": {
+    "median": 0.0,
+    "boot95": [
+      0.0,
+      0.0
+    ],
+    "wilcoxon_p_vs_0.05": 1.0,
+    "holm_p": 1.0,
+    "verdict": "not_supported"
+  },
+  "M4": {
+    "median_diff": 0.0,
+    "wilcoxon_p": 1.0,
+    "holm_p": 1.0,
+    "verdict": "not_supported"
+  },
+  "M5_descriptive": {
+    "planar_2link": {
+      "accepted": 5,
+      "full_matrix_share_of_accepted": 0.2,
+      "acceptance_by_judge_n": {
+        "36": 0.03676470588235294,
+        "60": 0.03676470588235294,
+        "100": 0.03676470588235294
+      }
+    },
+    "planar_3link": {
+      "accepted": 1,
+      "full_matrix_share_of_accepted": 1.0,
+      "acceptance_by_judge_n": {
+        "36": 0.007352941176470588,
+        "60": 0.007352941176470588,
+        "100": 0.007352941176470588
+      }
+    },
+    "franka_7dof": {
+      "accepted": 0,
+      "full_matrix_share_of_accepted": NaN,
+      "acceptance_by_judge_n": {
+        "36": 0.0,
+        "60": 0.014705882352941176,
+        "100": 0.014705882352941176
+      }
+    }
+  },
+  "kinematic_max_correction": 9.43689570931383e-16
+}

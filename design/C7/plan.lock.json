@@ -1,0 +1,263 @@
+{
+ "sha256": "39289bba1c10964fb3230ef95088fe7b9a16d007e899e78a0ece69106d139abe",
+ "locked_at": "2026-11-06T22:32:36",
+ "plan": {
+  "study": {
+   "title": "C7: magnitude-based and direction-wise acceptance of constraint-preserving corrections for multi-joint arm world models",
+   "venue": "ICT Express 2027 original research (manuscript-v1 line)",
+   "research_questions": [
+    "RQ1: Does accepting a correction by the size of its loss change (an upper confidence bound on the mean relative loss) recover safe gains that the strict count rule of C1 gave up on a 7-DOF arm?",
+    "RQ2: Do accepted corrections stay harmless in-distribution under the magnitude rule on every system?",
+    "RQ3: Does direction-wise partial acceptance (fixed-sequence testing over eigen-directions of the contraction) accept more useful corrections than whole-matrix acceptance?",
+    "RQ4: What do the judge-set size (36 vs 100) and a tail condition cost or buy, and what happens under range widening (not covered by the guarantee)?"
+   ],
+   "synthetic_data": true
+  },
+  "seeds": {
+   "values": [
+    6901,
+    6904,
+    6907,
+    6910,
+    6913,
+    6916,
+    6919,
+    6922,
+    6925,
+    6928,
+    6931,
+    6934,
+    6937,
+    6940,
+    6943,
+    6946,
+    6949,
+    6952,
+    6955,
+    6958,
+    6961,
+    6964,
+    6967,
+    6970,
+    6973,
+    6976,
+    6979,
+    6982,
+    6985,
+    6988,
+    6991,
+    6994,
+    6997,
+    6999
+   ],
+   "unit": "seed",
+   "reason": "34 new seeds (mod 1000 = 901..999, unused by every earlier protocol including C1 = 11..313). Power: seed-level sd of the 7-DOF ID gain of the always-on contraction in C1 was 0.058 (used as a pilot value; the gated gain has more zeros, so 0.079 from the 2-DOF pilot is used as a conservative sd)"
+  },
+  "stats": {
+   "interval": "bootstrap95",
+   "paired": true,
+   "test": "wilcoxon",
+   "alpha": 0.05,
+   "correction": "holm",
+   "correction_reason": "Holm over the confirmatory p-value claims (N1, N3); N2 is bound-based per system; N4/N5 are descriptive"
+  },
+  "budget": {
+   "per_run_minutes": 0.2,
+   "total_limit_minutes": 300,
+   "hardware": "Apple M5 Max 128GB (primary, parallel cases) via Claude Code; Linux 1 CPU core for a reduced smoke subset and a cross-platform decision check",
+   "tuning_trials_per_method": 1,
+   "tuning_reason": "No tuning on test data; candidate fitting and lambda selection identical to C1 (C_s1); gate thresholds fixed in advance here",
+   "tuning_split": "validation"
+  },
+  "datasets": [
+   {
+    "name": "planar_2link",
+    "source": "same generator, prior, truth and settings as C1 (impl/c1/c1_models.py, c1_config.json) with the C7 seeds",
+    "split": "per run: train 12/36, C_f 12, C_s1 12, judge 100 (first 36 = small-judge variant), test 48 ID + 48 range widening",
+    "leakage_unit": "group",
+    "license": "own code"
+   },
+   {
+    "name": "planar_3link",
+    "source": "as planar_2link",
+    "split": "as planar_2link",
+    "leakage_unit": "group",
+    "license": "own code"
+   },
+   {
+    "name": "franka_7dof",
+    "source": "as C1 (MuJoCo 4.0.0, Menagerie commit 98a70c56, panda_nohand.xml)",
+    "split": "as planar_2link",
+    "leakage_unit": "group",
+    "license": "MuJoCo Apache-2.0; franka_emika_panda Apache-2.0"
+   }
+  ],
+  "methods": [
+   {
+    "name": "mag_dir_gate",
+    "role": "proposed",
+    "source": "this work: rule (1) magnitude gate (one-sided 95% betting upper confidence bound, Waudby-Smith and Ramdas 2024, on the mean of min(ratio, 2)/2 over the n = 100 judge episodes (primary); accept iff bound <= (1 + tau)/2, tau = 0; no tail condition in the primary rule) applied by rule (2) fixed-sequence testing over the eigen-directions of A - I ordered by their C_s1 loss reduction; the accepted prefix gives A_S = I + sum_{j in S} (lambda_j - 1) v_j v_j^T, which stays symmetric with eigenvalues in [0, 1] (Proposition 1 keeps the linear constraints)",
+    "components": [
+     "magnitude_rule",
+     "direction_wise"
+    ]
+   },
+   {
+    "name": "strict_ltt_c1",
+    "role": "baseline",
+    "source": "C1 rule: whole C_s1-best candidate, accept iff Clopper-Pearson upper bound on P(episode worse) <= 0.1 with 36 judge episodes",
+    "why": "the rule whose conservativeness C7 addresses; same cases"
+   },
+   {
+    "name": "mean_loss_rule",
+    "role": "baseline",
+    "source": "apply the C_s1-best candidate if it lowers the C_s1 loss by 1% (no finite-sample test)",
+    "why": "simplest validation rule; shows what the guarantee costs"
+   },
+   {
+    "name": "equal_budget_retrain",
+    "role": "baseline",
+    "source": "as C1",
+    "why": "most accurate alternative when weights are available"
+   },
+   {
+    "name": "keep_Z",
+    "role": "simple_baseline",
+    "source": "learned world model forecast",
+    "why": "incumbent"
+   },
+   {
+    "name": "always_on",
+    "role": "simple_baseline",
+    "source": "C_s1-best candidate always applied",
+    "why": "upper reference for the gain a gate can recover"
+   },
+   {
+    "name": "mag_whole_gate",
+    "role": "ablation",
+    "removes": "direction_wise"
+   },
+   {
+    "name": "strict_dir_gate",
+    "role": "ablation",
+    "removes": "magnitude_rule"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "median_rel_gain",
+    "direction": "higher",
+    "primary": true,
+    "expected_sd": 0.079
+   },
+   {
+    "name": "accepted_mean_ratio_worse_share_id",
+    "direction": "lower",
+    "primary": true,
+    "expected_sd": 0.0
+   },
+   {
+    "name": "runs_with_accepted_correction",
+    "direction": "higher",
+    "primary": false,
+    "expected_sd": 0.0
+   }
+  ],
+  "claims": [
+   {
+    "id": "N1",
+    "claim": "On franka_7dof in-distribution, mag_dir_gate gives a median per-run relative gain over keep_Z of at least 5% (rejected runs count as 0)",
+    "metric": "median_rel_gain",
+    "compare": [
+     "mag_dir_gate",
+     "keep_Z"
+    ],
+    "datasets": [
+     "franka_7dof"
+    ],
+    "min_effect": 0.05,
+    "min_effect_reason": "same threshold as C1-M3, so the two rules are judged by the same bar; below 5% a deployer would not pay for the observed judge episodes",
+    "falsify_if": "lower end of the seed-cluster bootstrap 95% interval below 0.05: not supported",
+    "expected": "기대(결과 아님): 불확실(파일럿 12 케이스에서 Franka 승인 일부)"
+   },
+   {
+    "id": "N2",
+    "claim": "Per system, among runs where mag_dir_gate applies a correction, the share whose in-distribution test mean ratio (mean over test episodes of min(ratio, 2)) exceeds 1 is at most 0.10",
+    "metric": "accepted_mean_ratio_worse_share_id",
+    "compare": [
+     "mag_dir_gate",
+     "keep_Z"
+    ],
+    "datasets": [
+     "planar_2link",
+     "planar_3link",
+     "franka_7dof"
+    ],
+    "min_effect": 0.1,
+    "min_effect_reason": "epsilon-level guarantee of rule (1) translated to runs; 0.10 matches delta of C1",
+    "falsify_if": "per system: fewer than 10 runs with an applied correction: inconclusive; not supported if the one-sided 95% Clopper-Pearson LOWER bound exceeds 0.10; supported if the one-sided 95% UPPER bound is at most 0.10; inconclusive otherwise",
+    "expected": "기대(결과 아님): 불확실"
+   },
+   {
+    "id": "N3",
+    "claim": "On franka_7dof, direction-wise acceptance applies a correction in more runs than whole-matrix acceptance under the same magnitude rule, by at least 10% of runs",
+    "metric": "runs_with_accepted_correction",
+    "compare": [
+     "mag_dir_gate",
+     "mag_whole_gate"
+    ],
+    "datasets": [
+     "franka_7dof"
+    ],
+    "min_effect": 0.1,
+    "min_effect_reason": "14 of 136 runs; fewer would not justify the extra procedure",
+    "falsify_if": "difference below 10% of runs or Holm-adjusted one-sided exact McNemar p >= 0.05: not supported",
+    "expected": "기대(결과 아님): 불확실"
+   },
+   {
+    "id": "N4",
+    "claim": "Descriptive: acceptance rates and median gains of all gates per system; the 36-episode judge variant and the tail-condition variant (P(ratio > 1.1) Clopper-Pearson upper bound <= 0.2); comparison with C1's strict rule on the same cases",
+    "metric": "median_rel_gain",
+    "compare": [
+     "mag_dir_gate",
+     "strict_ltt_c1"
+    ],
+    "datasets": [
+     "planar_2link",
+     "planar_3link",
+     "franka_7dof"
+    ],
+    "min_effect": 0.1,
+    "min_effect_reason": "descriptive; a 10-point change in acceptance rate between gates or judge sizes would change design advice",
+    "falsify_if": "descriptive; reported as observed without a verdict",
+    "expected": "기대(결과 아님): 엄격 규칙보다 승인 증가"
+   },
+   {
+    "id": "N5",
+    "claim": "Descriptive: under range widening (not covered by the guarantee), the share of runs with an applied correction that become worse than keep_Z, per system and gate",
+    "metric": "accepted_mean_ratio_worse_share_id",
+    "compare": [
+     "mag_dir_gate",
+     "keep_Z"
+    ],
+    "datasets": [
+     "planar_2link",
+     "planar_3link",
+     "franka_7dof"
+    ],
+    "min_effect": 0.1,
+    "min_effect_reason": "descriptive; one accepted run in ten made worse under range widening would be operationally relevant",
+    "falsify_if": "descriptive; reported as observed without a verdict",
+    "expected": "기대(결과 아님): 평면 팔에서 악화 발생 가능"
+   }
+  ],
+  "stop_rules": {
+   "rules": [
+    "예산의 80% 초과 시 seed를 줄이지 않고 학습 크기 설정 하나를 줄인 뒤 기록",
+    "버그 발견 시 영향받는 실행만 재실행하고 CHANGELOG와 plan_changes.md에 기록",
+    "실패 / 시간 초과 실행은 결측으로 기록하고 분모에서 제외한 수를 보고",
+    "결과를 본 뒤의 변경은 relock 사유와 함께 논문 한계 절에 기록"
+   ]
+  }
+ }
+}

@@ -1,0 +1,2 @@
+Reproducible code for "Physical consistency is not accuracy: magnitude-based acceptance of post-hoc world-model corrections"
+Built 2026-11-07 from manuscript-v1. Manuscript sources, review records and submission documents are not included.

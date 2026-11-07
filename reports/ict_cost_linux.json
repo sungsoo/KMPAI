@@ -1,0 +1,44 @@
+{
+  "machine": {
+    "platform": "Linux-6.18.44-fc-v310-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "python": "3.12.3",
+    "numpy": "2.4.4"
+  },
+  "arms": {
+    "planar_2link": {
+      "d": 2,
+      "cases_timed": 20,
+      "gate_ms_median": 4.684783499998346,
+      "gate_ms_p95": 5.519832099998819,
+      "ratios_ms_median_per_candidate": 0.5293415000000579,
+      "apply_us_median_per_forecast": 9.863499998985503,
+      "bytes_observed_judge_Y": 161600,
+      "bytes_judge_forecasts_PZ": 320000,
+      "bytes_matrix_A": 16
+    },
+    "planar_3link": {
+      "d": 3,
+      "cases_timed": 20,
+      "gate_ms_median": 4.713048999999359,
+      "gate_ms_p95": 9.009825199999176,
+      "ratios_ms_median_per_candidate": 0.6682859999997959,
+      "apply_us_median_per_forecast": 10.131500001619997,
+      "bytes_observed_judge_Y": 242400,
+      "bytes_judge_forecasts_PZ": 480000,
+      "bytes_matrix_A": 36
+    },
+    "franka_7dof": {
+      "d": 7,
+      "cases_timed": 20,
+      "gate_ms_median": 4.374222999999233,
+      "gate_ms_p95": 11.906147249999144,
+      "ratios_ms_median_per_candidate": 1.4430875000019938,
+      "apply_us_median_per_forecast": 11.160999999759724,
+      "bytes_observed_judge_Y": 565600,
+      "bytes_judge_forecasts_PZ": 1120000,
+      "bytes_matrix_A": 196
+    }
+  }
+}

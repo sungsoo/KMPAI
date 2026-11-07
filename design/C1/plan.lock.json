@@ -1,0 +1,275 @@
+{
+ "sha256": "c209be7198973896334fcab482ebbb44369e9ca8202dd333e3f1e42e7b02d41b",
+ "locked_at": "2026-11-06T21:36:03",
+ "plan": {
+  "study": {
+   "title": "C1: constraint-preserving correction and acceptance testing for multi-joint arm world models",
+   "venue": "ICT Express 2027 original research (manuscript-v1 line)",
+   "research_questions": [
+    "RQ1: Does a constraint-preserving (contraction) correction still harm forecast accuracy on multi-joint arms (d = 2, 3, 7)?",
+    "RQ2: Does LTT acceptance keep accepted runs harmless in-distribution and under range widening as the number of joints grows?",
+    "RQ3: Does cross-joint coupling make the full correction matrix the useful candidate as d grows, and what does it add over per-joint (diagonal) weights?",
+    "RQ4: How does the judge-set size needed for acceptance change with d (n = 36, 60, 100)?"
+   ],
+   "synthetic_data": true
+  },
+  "seeds": {
+   "values": [
+    3011,
+    3023,
+    3037,
+    3041,
+    3049,
+    3061,
+    3067,
+    3079,
+    3083,
+    3089,
+    3109,
+    3119,
+    3121,
+    3137,
+    3163,
+    3167,
+    3169,
+    3181,
+    3187,
+    3191,
+    3203,
+    3209,
+    3217,
+    3221,
+    3229,
+    3251,
+    3253,
+    3257,
+    3259,
+    3271,
+    3299,
+    3301,
+    3307,
+    3313
+   ],
+   "unit": "seed",
+   "reason": "34 seeds: power 0.8 at alpha 0.05 for M1 (sd 0.162, min effect 0.10) and M3 (sd 0.079, min effect 0.05), sds from the 2-DOF pilot (results_h10s_confirm). Seed values mod 1000 = 11..313 differ from every earlier protocol (101..229, 301..423, 503..661, 511..621, 701..857); the planar arms and the Franka model also use different data generators from the 2-DOF oscillators"
+  },
+  "stats": {
+   "interval": "bootstrap95",
+   "paired": true,
+   "test": "wilcoxon",
+   "alpha": 0.05,
+   "correction": "holm",
+   "correction_reason": "Holm over the confirmatory claims M1-M4; M5 and the judge-size curve are descriptive"
+  },
+  "budget": {
+   "per_run_minutes": 0.2,
+   "total_limit_minutes": 300,
+   "hardware": "Apple M5 Max 128GB (primary, parallel cases) via Claude Code; Linux 1 CPU core for a reduced smoke subset and a cross-platform decision check",
+   "tuning_trials_per_method": 1,
+   "tuning_reason": "No method is tuned on test data: Z and the retrained model use the same fixed MLP settings (width scaled by d), correction strengths lambda are chosen on C_s1 for every correction method from the same grid",
+   "tuning_split": "validation"
+  },
+  "datasets": [
+   {
+    "name": "planar_2link",
+    "source": "self-implemented planar 2-link arm (Lagrangian rigid-body dynamics), nominal parameters as physics prior; truth adds joint friction (Coulomb + viscous), link-mass error and joint coupling",
+    "split": "per run: train 12/36, C_f 12, C_s1 12, C_s2 36 (60/100 post hoc), test 48 episodes; test generated with separate seeds",
+    "leakage_unit": "group",
+    "license": "own code"
+   },
+   {
+    "name": "planar_3link",
+    "source": "self-implemented planar 3-link arm, same construction as planar_2link",
+    "split": "as planar_2link",
+    "leakage_unit": "group",
+    "license": "own code"
+   },
+   {
+    "name": "franka_7dof",
+    "source": "MuJoCo 4.0.0 (pip) with franka_emika_panda/panda_nohand.xml from MuJoCo Menagerie, commit 98a70c569c4c1b6da467a20012f766ee1f8dc521 (pinned 2026-11-06); prior = nominal model without joint friction/damping mismatch; truth = model with friction, armature and link-mass error",
+    "split": "as planar_2link",
+    "leakage_unit": "group",
+    "license": "MuJoCo Apache-2.0; franka_emika_panda LICENSE Apache-2.0 (checked at the pinned commit, 2026-11-06)"
+   }
+  ],
+  "methods": [
+   {
+    "name": "ltt_correction",
+    "role": "proposed",
+    "source": "this work (Algorithm 1 of manuscript-v1, unchanged), candidates {0, alpha I, D_lambda, A_lambda}",
+    "components": [
+     "contraction",
+     "ltt_gate",
+     "full_matrix_candidate"
+    ]
+   },
+   {
+    "name": "equal_budget_retrain",
+    "role": "baseline",
+    "source": "residual MLP retrained on all non-test episodes with the same settings",
+    "why": "the alternative a deployer with weight access would use; strongest accuracy competitor in the 2-DOF pilot"
+   },
+   {
+    "name": "mean_loss_rule",
+    "role": "baseline",
+    "source": "apply the C_s1-best candidate if it lowers the C_s1 loss by 1%",
+    "why": "simplest validation rule; matched LTT's mean gain in the 2-DOF pilot, so it is the fair test of whether the finite-sample gate adds anything"
+   },
+   {
+    "name": "per_step_combination",
+    "role": "baseline",
+    "source": "per-step combination weights fitted on C_f (Wang et al., Int. J. Forecast. 2023)",
+    "why": "forecast-combination baseline that breaks kinematic constraints"
+   },
+   {
+    "name": "keep_Z",
+    "role": "simple_baseline",
+    "source": "learned world model forecast without correction",
+    "why": "the incumbent every correction must not worsen"
+   },
+   {
+    "name": "physics_prior",
+    "role": "simple_baseline",
+    "source": "nominal-model rollout",
+    "why": "lower anchor"
+   },
+   {
+    "name": "no_contraction",
+    "role": "ablation",
+    "removes": "contraction"
+   },
+   {
+    "name": "fixed_matrix_no_gate",
+    "role": "ablation",
+    "removes": "ltt_gate"
+   },
+   {
+    "name": "ltt_diagonal_only",
+    "role": "ablation",
+    "removes": "full_matrix_candidate"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "median_rel_gain",
+    "direction": "higher",
+    "primary": true,
+    "expected_sd": 0.079
+   },
+   {
+    "name": "accepted_worse_share_id",
+    "direction": "lower",
+    "primary": true,
+    "expected_sd": 0.0
+   },
+   {
+    "name": "worse_share_range_widening",
+    "direction": "lower",
+    "primary": false,
+    "expected_sd": 0.162
+   },
+   {
+    "name": "full_matrix_pick_share",
+    "direction": "higher",
+    "primary": false,
+    "expected_sd": 0.0
+   }
+  ],
+  "claims": [
+   {
+    "id": "M1",
+    "claim": "On every multi-joint system, the always-applied contraction correction is worse than keep_Z in at least 10% of runs under range widening",
+    "metric": "worse_share_range_widening",
+    "compare": [
+     "fixed_matrix_no_gate",
+     "keep_Z"
+    ],
+    "datasets": [
+     "planar_2link",
+     "planar_3link",
+     "franka_7dof"
+    ],
+    "min_effect": 0.1,
+    "min_effect_reason": "one run in ten made worse is operationally unacceptable for a deployed forecaster; the 2-DOF pilot showed 0.49",
+    "falsify_if": "per system: supported if the one-sided 95% Clopper-Pearson LOWER bound of the worse share is at least 0.10; not supported if the one-sided 95% UPPER bound is below 0.10; inconclusive otherwise",
+    "expected": "기대(결과 아님): 일부 시스템에서 지지"
+   },
+   {
+    "id": "M2",
+    "claim": "Among runs that LTT accepts, the share worse than keep_Z in-distribution stays at or below delta = 0.1 on every system",
+    "metric": "accepted_worse_share_id",
+    "compare": [
+     "ltt_correction",
+     "keep_Z"
+    ],
+    "datasets": [
+     "planar_2link",
+     "planar_3link",
+     "franka_7dof"
+    ],
+    "min_effect": 0.1,
+    "min_effect_reason": "delta of Proposition 2",
+    "falsify_if": "per system: fewer than 10 accepted runs: inconclusive; not supported if the one-sided 95% Clopper-Pearson LOWER bound exceeds 0.10; supported if the one-sided 95% UPPER bound is at most 0.10; inconclusive otherwise",
+    "expected": "기대(결과 아님): 지지"
+   },
+   {
+    "id": "M3",
+    "claim": "On franka_7dof, LTT gives a median per-run relative gain over keep_Z of at least 5% across all runs (rejected runs count as 0)",
+    "metric": "median_rel_gain",
+    "compare": [
+     "ltt_correction",
+     "keep_Z"
+    ],
+    "datasets": [
+     "franka_7dof"
+    ],
+    "min_effect": 0.05,
+    "min_effect_reason": "below 5% a deployer would not pay for 60 observed episodes per acceptance",
+    "falsify_if": "the lower end of the seed-cluster bootstrap 95% interval is below 0.05: not supported",
+    "expected": "기대(결과 아님): 불확실"
+   },
+   {
+    "id": "M4",
+    "claim": "On franka_7dof, adding the full-matrix candidate raises the median gain over the diagonal-only gate by at least 2 points",
+    "metric": "median_rel_gain",
+    "compare": [
+     "ltt_correction",
+     "ltt_diagonal_only"
+    ],
+    "datasets": [
+     "franka_7dof"
+    ],
+    "min_effect": 0.05,
+    "min_effect_reason": "cross-joint coupling is the reason to fit a d x d matrix (49 parameters at d = 7 against 7 for diagonal); a benefit below 5 points does not justify them, and a 2-point effect would need about 186 seeds (plan_tool check)",
+    "falsify_if": "Holm-adjusted Wilcoxon p >= 0.05 or the median paired difference is below 0.05: not supported",
+    "expected": "기대(결과 아님): 불확실"
+   },
+   {
+    "id": "M5",
+    "claim": "Descriptive: the share of accepted corrections that are full matrices grows with d (2, 3, 7), and the acceptance rate as a function of judge-set size n = 36, 60, 100",
+    "metric": "full_matrix_pick_share",
+    "compare": [
+     "ltt_correction",
+     "ltt_diagonal_only"
+    ],
+    "datasets": [
+     "planar_2link",
+     "planar_3link",
+     "franka_7dof"
+    ],
+    "min_effect": 0.2,
+    "min_effect_reason": "a 20-point change between d = 2 and d = 7 would change design advice",
+    "falsify_if": "descriptive; reported as observed without a verdict",
+    "expected": "기대(결과 아님): 증가"
+   }
+  ],
+  "stop_rules": {
+   "rules": [
+    "예산의 80% 초과 시 seed를 줄이지 않고 franka_7dof의 학습 에피소드 설정(12/36) 중 하나를 줄인 뒤 기록",
+    "버그 발견 시 영향받는 실행만 재실행하고 CHANGELOG와 plan_changes.md에 기록",
+    "실패/시간 초과 실행은 0이 아니라 결측으로 기록하고 분모에서 제외한 수를 보고",
+    "결과를 본 뒤의 변경은 relock 사유와 함께 논문 한계 절에 기록"
+   ]
+  }
+ }
+}

@@ -1,0 +1,19 @@
+{
+  "cases": 408,
+  "ok": 408,
+  "failed": 0,
+  "smoke": false,
+  "seconds_this_invocation": 298.823449583957,
+  "protocol_lock": {
+    "created_utc": "2026-11-06T20:33:07Z",
+    "sha256": {
+      "impl/c1/c1_config.json": "e70b4984f7c95caf1def4cee9f7cb676c7889c15518a9c9c729960550087d64c",
+      "impl/c1/c1_models.py": "a61171895fcdd7dff994d0afa17b96d4b71ab9c31c80250d6b8307631eb154e1",
+      "impl/c1/c1_study.py": "43aa81be29bacd110ba205db0223a2f13da5a657c7abd1467f56cd59c0d3f464",
+      "impl/c1/assets/panda_nohand.xml": "f05c9674dbc6081c8f096133d8537bdd977f87ec8eeb6264a77a9295ae88af09",
+      "impl/calibration.py": "584722114c7436596f41cf14819af68958efc37b3c381064a4c1ed39fec074bc",
+      "impl/confirm.py": "563d6b560a66fd8206b41f53f6b736b1e6382f6174ee3482adf528ee2d687f18",
+      "design/C1/plan.toml": "6715eac3287c932623f58cc6bcb68ad57f0fcf16fd03153ea56a0ac9ea3c2061"
+    }
+  }
+}

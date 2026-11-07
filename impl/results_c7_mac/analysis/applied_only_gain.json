@@ -1,0 +1,27 @@
+{
+  "strict_ltt_c1": {
+    "planar_2link": NaN,
+    "planar_3link": NaN,
+    "franka_7dof": 0.5572905988535697
+  },
+  "mag_whole_gate": {
+    "planar_2link": 0.11188866603770041,
+    "planar_3link": 0.22698166280155696,
+    "franka_7dof": 0.26309545788508026
+  },
+  "mag_dir_gate": {
+    "planar_2link": 0.11188866603770026,
+    "planar_3link": 0.2834744452543133,
+    "franka_7dof": 0.2716278822407982
+  },
+  "mean_loss_rule": {
+    "planar_2link": 0.0793568239080521,
+    "planar_3link": 0.1513481944157346,
+    "franka_7dof": 0.258938484899116
+  },
+  "always_on": {
+    "planar_2link": 0.07197647948835918,
+    "planar_3link": 0.13622412138690254,
+    "franka_7dof": 0.25865874084179874
+  }
+}
